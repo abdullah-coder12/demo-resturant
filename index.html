@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tandoor Multan — Premium Heritage Dining</title>
+    <title>Tandoor Multan — 4K Elite Dining</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script>
@@ -16,8 +16,7 @@
                     colors: {
                         saffron: '#F4D03F',
                         charcoal: '#0A0A0A',
-                        terracotta: '#C75C2E',
-                        'premium-gold': '#D4AF37',
+                        gold: '#D4AF37',
                     },
                     fontFamily: {
                         display: ['Playfair Display', 'serif'],
@@ -29,154 +28,234 @@
     </script>
 
     <style>
-        body { background-color: #0A0A0A; color: white; scroll-behavior: smooth; }
+        body { background-color: #0A0A0A; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        /* 4K Visual Enhancements */
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=90&w=3840&auto=format&fit=crop');
+        /* 4K Cinematic Hero */
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=95&w=3840&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax effect for 4K feel */
+            background-attachment: fixed;
             height: 100vh;
         }
 
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
+        .premium-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #F4D03F;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .cart-float {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #F4D03F;
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(244, 208, 63, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 35px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            z-index: 100;
-            width: 70px;
-            height: 70px;
+            background: #25D366;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: 0.3s;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #128C7E;
-        }
+
+        .whatsapp-btn:hover { transform: rotate(15deg) scale(1.1); }
+        
+        /* Smooth Slide Animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="font-body">
+<body>
 
-    <a href="https://wa.me/923001234567?text=Assalam-o-Alaikum!%20I%20want%20to%20place%20an%20order." class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
+    <div class="cart-float">
+        <i class="fas fa-receipt"></i>
+        <span>Total: Rs. <span id="bill-amount">0</span></span>
+    </div>
+
+    <a href="https://wa.me/923001234567" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp text-white"></i>
     </a>
 
-    <nav class="fixed w-full z-50 p-6 transition-all duration-500 glass-effect">
+    <nav class="fixed w-full z-50 glass-nav py-5 px-8">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-3xl font-display font-black tracking-tighter text-saffron">
+            <div class="text-3xl font-display font-black text-saffron tracking-tighter">
                 TANDOOR <span class="text-white">MULTAN</span>
             </div>
-            <div class="hidden md:flex space-x-12 items-center text-xs uppercase tracking-[0.3em]">
-                <a href="#menu" class="hover:text-saffron transition">Discover Menu</a>
-                <a href="#" class="hover:text-saffron transition">The Heritage</a>
-                <a href="https://wa.me/923001234567" class="border border-saffron text-saffron px-8 py-3 hover:bg-saffron hover:text-black transition duration-500">Order Online</a>
+            <div class="hidden md:flex gap-10 text-[10px] tracking-[0.4em] uppercase font-bold">
+                <a href="#menu" class="hover:text-saffron transition">Explore Menu</a>
+                <a href="#about" class="hover:text-saffron transition">Our Story</a>
+                <a href="javascript:void(0)" onclick="sendWhatsAppOrder()" class="bg-saffron text-black px-6 py-2 rounded-sm">Place Order</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section flex items-center justify-center text-center px-4">
-        <div class="max-w-6xl">
-            <p class="text-saffron tracking-[0.5em] uppercase text-sm mb-6 font-bold">Premium Multani Experience</p>
-            <h1 class="text-6xl md:text-9xl font-display text-white mb-8 italic leading-tight">Elite Taste, <br>Pure Tradition.</h1>
-            <div class="h-1 w-40 bg-terracotta mx-auto mb-10"></div>
-            <p class="text-white/70 text-xl md:text-2xl font-light mb-12 max-w-3xl mx-auto leading-relaxed">
-                Experience the finest slow-cooked delicacies of Multan in an atmosphere of royal heritage.
-            </p>
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#menu" class="bg-saffron text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-white transition duration-500">View Menu</a>
-                <a href="https://wa.me/923001234567" class="glass-effect text-white px-12 py-5 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition duration-500">Book A Table</a>
-            </div>
-        </div>
-    </header>
-
-    <section id="menu" class="py-32 container mx-auto px-6">
-        <div class="text-center mb-24">
-            <h2 class="text-5xl font-display mb-6">Signature Selection</h2>
-            <p class="text-gray-500 tracking-widest uppercase text-sm">Finest Ingredients & Slow Cooking</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div class="group">
-                <div class="relative overflow-hidden mb-8 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1631515233349-296065e19722?q=80&w=1500&auto=format&fit=crop" class="w-full h-[500px] object-cover transition duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-8">
-                        <button class="bg-saffron text-black w-full py-4 font-bold">Order on WhatsApp</button>
-                    </div>
-                </div>
-                <h3 class="text-3xl font-display mb-3">Royal Mutton Karahi</h3>
-                <p class="text-gray-400 font-light mb-4">A legacy recipe with hand-picked spices and premium meat.</p>
-                <div class="flex justify-between items-center border-t border-white/10 pt-4">
-                    <span class="text-saffron font-bold text-2xl">Rs. 3,850</span>
-                </div>
-            </div>
-
-            <div class="group">
-                <div class="relative overflow-hidden mb-8 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?q=80&w=1500&auto=format&fit=crop" class="w-full h-[500px] object-cover transition duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-8">
-                        <button class="bg-saffron text-black w-full py-4 font-bold">Order on WhatsApp</button>
-                    </div>
-                </div>
-                <h3 class="text-3xl font-display mb-3">Tandoori Platter</h3>
-                <p class="text-gray-400 font-light mb-4">Assorted kebabs and tikkas smoked to perfection.</p>
-                <div class="flex justify-between items-center border-t border-white/10 pt-4">
-                    <span class="text-saffron font-bold text-2xl">Rs. 4,200</span>
-                </div>
-            </div>
-
-            <div class="group">
-                <div class="relative overflow-hidden mb-8 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1500&auto=format&fit=crop" class="w-full h-[500px] object-cover transition duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-8">
-                        <button class="bg-saffron text-black w-full py-4 font-bold">Order on WhatsApp</button>
-                    </div>
-                </div>
-                <h3 class="text-3xl font-display mb-3">Garlic Roghni Naan</h3>
-                <p class="text-gray-400 font-light mb-4">Golden glazed with butter, sesame seeds and fresh garlic.</p>
-                <div class="flex justify-between items-center border-t border-white/10 pt-4">
-                    <span class="text-saffron font-bold text-2xl">Rs. 180</span>
-                </div>
+    <section class="hero-bg flex items-center justify-center text-center px-6">
+        <div class="max-w-5xl">
+            <p class="text-saffron tracking-[0.6em] uppercase text-xs mb-6 font-bold">Authentic Taste of Punjab</p>
+            <h1 class="text-6xl md:text-[120px] font-display leading-none mb-10 italic">Crowning the <br>Multani Flavors</h1>
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="#menu" class="bg-white text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-saffron transition-all duration-500">Discover Menu</a>
+                <span class="text-white/30 hidden md:block">|</span>
+                <p class="text-white/60 text-sm tracking-widest uppercase">Traditional Tandoor Since 1987</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black border-t border-white/5 py-32">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="font-display text-5xl text-saffron mb-12">The Heart of Multan</h2>
-            <div class="grid md:grid-cols-3 gap-12 text-gray-400 max-w-4xl mx-auto">
-                <div class="p-8 glass-effect">
-                    <i class="fas fa-map-marker-alt text-saffron mb-4 text-2xl"></i>
-                    <p>Gulgasht, Multan</p>
+    <section id="menu" class="py-32 container mx-auto px-6">
+        <div class="text-center mb-24 reveal">
+            <h2 class="text-5xl md:text-7xl font-display mb-6 italic text-saffron">Our Specialities</h2>
+            <p class="text-gray-500 tracking-[0.3em] uppercase text-xs">Slow Cooked with Love</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            <div class="premium-card rounded-[40px] overflow-hidden p-4 reveal">
+                <div class="relative h-80 overflow-hidden rounded-[30px] mb-8">
+                    <img src="https://images.unsplash.com/photo-1631515233349-296065e19722?w=800" class="w-full h-full object-cover">
                 </div>
-                <div class="p-8 glass-effect">
-                    <i class="fas fa-phone text-saffron mb-4 text-2xl"></i>
-                    <p>+92 300 1234567</p>
-                </div>
-                <div class="p-8 glass-effect">
-                    <i class="fas fa-clock text-saffron mb-4 text-2xl"></i>
-                    <p>12 PM - 12 AM</p>
+                <div class="px-6 pb-6 text-center">
+                    <h3 class="text-2xl font-display mb-2">Multani Mutton Karahi</h3>
+                    <p class="text-gray-500 text-sm mb-6 font-light">Fresh mutton in traditional desi ghee and yogurt gravy.</p>
+                    <div class="flex justify-between items-center bg-white/5 p-4 rounded-2xl">
+                        <span class="text-saffron font-bold text-xl">Rs. 2,800</span>
+                        <button onclick="addToOrder('Mutton Karahi', 2800)" class="bg-saffron text-black p-3 rounded-full hover:bg-white transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <p class="mt-20 text-xs tracking-widest text-gray-700 uppercase italic">Designed for Excellence by Abdullah Coder</p>
+
+            <div class="premium-card rounded-[40px] overflow-hidden p-4 reveal">
+                <div class="relative h-80 overflow-hidden rounded-[30px] mb-8">
+                    <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800" class="w-full h-full object-cover">
+                </div>
+                <div class="px-6 pb-6 text-center">
+                    <h3 class="text-2xl font-display mb-2">BBQ Feast Platter</h3>
+                    <p class="text-gray-500 text-sm mb-6 font-light">Smoked Malai Boti, Seekh Kebabs, and Tikka pieces.</p>
+                    <div class="flex justify-between items-center bg-white/5 p-4 rounded-2xl">
+                        <span class="text-saffron font-bold text-xl">Rs. 1,450</span>
+                        <button onclick="addToOrder('BBQ Platter', 1450)" class="bg-saffron text-black p-3 rounded-full hover:bg-white transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="premium-card rounded-[40px] overflow-hidden p-4 reveal">
+                <div class="relative h-80 overflow-hidden rounded-[30px] mb-8">
+                    <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?w=800" class="w-full h-full object-cover">
+                </div>
+                <div class="px-6 pb-6 text-center">
+                    <h3 class="text-2xl font-display mb-2">Cheese Roghni Naan</h3>
+                    <p class="text-gray-500 text-sm mb-6 font-light">Soft naan stuffed with mozzarella and topped with sesame.</p>
+                    <div class="flex justify-between items-center bg-white/5 p-4 rounded-2xl">
+                        <span class="text-saffron font-bold text-xl">Rs. 250</span>
+                        <button onclick="addToOrder('Cheese Naan', 250)" class="bg-saffron text-black p-3 rounded-full hover:bg-white transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <div class="mt-32 text-center reveal">
+            <button onclick="sendWhatsAppOrder()" class="bg-green-600 hover:bg-green-500 text-white px-20 py-8 rounded-full text-2xl font-black shadow-2xl transition transform hover:scale-105">
+                <i class="fab fa-whatsapp mr-4"></i> CONFIRM ORDER NOW
+            </button>
+            <p class="text-gray-600 mt-6 tracking-widest text-[10px] uppercase font-bold">Orders are received instantly on WhatsApp</p>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs tracking-tighter uppercase font-bold">Managed by Abdullah Coder &copy; 2026</p>
     </footer>
+
+    <script>
+        let items = [];
+        let total = 0;
+
+        function addToOrder(name, price) {
+            items.push({ name, price });
+            total += price;
+            
+            // Update UI
+            document.getElementById('bill-amount').innerText = total.toLocaleString();
+            
+            // Success Effect
+            const tracker = document.querySelector('.cart-float');
+            tracker.style.background = '#FFF';
+            setTimeout(() => { tracker.style.background = '#F4D03F'; }, 300);
+        }
+
+        function sendWhatsAppOrder() {
+            if (items.length === 0) {
+                alert("Please add at least one dish to your order first!");
+                return;
+            }
+
+            const phone = "923001234567"; // CHANGE THIS NUMBER
+            let text = "*ONLINE ORDER FROM WEBSITE*%0A--------------------------%0A";
+            
+            items.forEach((item, i) => {
+                text += `${i+1}. *${item.name}* - Rs. ${item.price}%0A`;
+            });
+
+            text += "--------------------------%0A";
+            text += `*GRAND TOTAL: Rs. ${total}*%0A%0A_Please confirm my order!_`;
+
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+
+        // Reveal Animation Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial Check
+    </script>
 
 </body>
 </html>
