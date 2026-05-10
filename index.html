@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tandoor Multan — Authentic Heritage</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saffron: '#F4D03F',
+                        charcoal: '#0A0A0A',
+                        terracotta: '#C75C2E',
+                        'warm-ivory': '#FAF3E8',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FAF3E8; scroll-behavior: smooth; }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+        }
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="font-body text-charcoal">
+
+    <nav class="glass-nav text-white p-5 sticky top-0 z-50 border-b border-white/10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-display font-bold tracking-tighter text-saffron">
+                TANDOOR <span class="text-white">MULTAN</span>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center text-sm uppercase tracking-widest">
+                <a href="#menu" class="hover:text-saffron transition">Menu</a>
+                <a href="#" class="hover:text-saffron transition">Story</a>
+                <a href="#" class="bg-saffron text-charcoal px-6 py-2 font-bold rounded-sm hover:bg-white transition">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl">
+            <p class="text-saffron tracking-[0.3em] uppercase text-sm mb-4 font-semibold">Established 1987</p>
+            <h1 class="text-5xl md:text-8xl font-display text-white mb-6 italic">Taste the Tradition of Multan</h1>
+            <p class="text-white/80 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto">
+                From the heart of Punjab to your plate. Experience authentic tandoori delights prepared with age-old secrets.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#menu" class="bg-terracotta text-white px-10 py-4 font-bold hover:bg-white hover:text-charcoal transition shadow-xl">Explore Menu</a>
+                <a href="#" class="border border-white text-white px-10 py-4 font-bold hover:bg-white hover:text-charcoal transition">Our Gallery</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="menu" class="py-24 container mx-auto px-6">
+        <div class="flex flex-col items-center mb-16 text-center">
+            <h2 class="text-4xl font-display mb-4">Chef's Recommendations</h2>
+            <div class="h-1 w-20 bg-saffron"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0?q=80&w=1000&auto=format&fit=crop" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                </div>
+                <h3 class="text-2xl font-display mb-2">Peshawari Chappal Kebab</h3>
+                <p class="text-gray-500 text-sm mb-4">Hand-minced beef with pomegranate seeds and organic spices.</p>
+                <p class="text-terracotta font-bold text-xl">Rs. 1,200</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?q=80&w=1000&auto=format&fit=crop" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                </div>
+                <h3 class="text-2xl font-display mb-2">Mutton Shinwari Karahi</h3>
+                <p class="text-gray-500 text-sm mb-4">Cooked in its own fat with minimal spices and maximum flavor.</p>
+                <p class="text-terracotta font-bold text-xl">Rs. 3,400</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1000&auto=format&fit=crop" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                </div>
+                <h3 class="text-2xl font-display mb-2">Garlic Butter Naan</h3>
+                <p class="text-gray-500 text-sm mb-4">Fresh from the tandoor, topped with roasted garlic and parsley.</p>
+                <p class="text-terracotta font-bold text-xl">Rs. 150</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-charcoal text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-3xl text-saffron mb-8">Visit Us in Multan</h2>
+            <p class="text-gray-400 max-w-md mx-auto mb-10 italic">
+                "Wherever you go in the world, the aroma of a Multani tandoor will always bring you back home."
+            </p>
+            <div class="flex justify-center space-x-6 mb-12">
+                <div class="text-left">
+                    <span class="block font-bold text-saffron uppercase text-xs tracking-widest">Location</span>
+                    <span class="text-sm">Gulgasht Colony, Multan</span>
+                </div>
+                <div class="w-px h-10 bg-white/10"></div>
+                <div class="text-left">
+                    <span class="block font-bold text-saffron uppercase text-xs tracking-widest">Phone</span>
+                    <span class="text-sm">+92 300 1234567</span>
+                </div>
+            </div>
+            <p class="text-xs text-gray-600 uppercase tracking-tighter">&copy; 2026 Tandoor Multan. Crafted for Abdullah-Coder.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
