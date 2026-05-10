@@ -3,113 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tandoor Multan — Smart 4K Ordering</title>
+    <title>Tandoor Multan — The Gold Standard</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900&family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        saffron: '#F4D03F',
+                        dark: '#050505',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body { background-color: #0A0A0A; color: white; font-family: 'Inter', sans-serif; }
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
-                        url('https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&w=1260');
-            background-size: cover; background-position: center; height: 100vh;
+        body { background-color: #050505; color: white; overflow-x: hidden; }
+        
+        /* 4K Cinematic Parallax */
+        .parallax-hero {
+            background: linear-gradient(rgba(0,0,0,0.5), #050505), 
+                        url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
         }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
         .premium-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.4s;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        /* Order Modal Styling */
+
+        .premium-card:hover {
+            transform: scale(1.03) translateY(-10px);
+            border-color: #F4D03F;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        .whatsapp-float {
+            position: fixed; bottom: 40px; right: 40px;
+            background: linear-gradient(135deg, #25d366, #128C7E);
+            width: 70px; height: 70px; border-radius: 24px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; z-index: 1000; transition: 0.5s;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         #orderModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            z-index: 9999; align-items: center; justify-content: center;
+            animation: fadeIn 0.4s ease;
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .reveal { visibility: hidden; }
     </style>
 </head>
-<body>
+<body class="font-sans">
 
-    <nav class="fixed w-full z-50 p-6 bg-black/50 backdrop-blur-md border-b border-white/5">
+    <a href="https://wa.me/923001234567" class="whatsapp-float">
+        <i class="fab fa-whatsapp text-white"></i>
+    </a>
+
+    <nav class="fixed w-full z-[5000] glass-nav py-6 px-10">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-2xl font-display font-black text-[#F4D03F]">TANDOOR MULTAN</div>
-            <div class="space-x-8">
-                <a href="#menu" class="text-sm font-bold tracking-widest uppercase hover:text-[#F4D03F] transition">Menu</a>
-                <a href="https://wa.me/923001234567" class="text-sm border border-[#F4D03F] px-4 py-2 text-[#F4D03F] hover:bg-[#F4D03F] hover:text-black transition">Contact</a>
+            <div class="text-3xl font-display font-black text-saffron italic tracking-tighter">
+                TANDOOR <span class="text-white">MULTAN</span>
+            </div>
+            <div class="hidden lg:flex items-center gap-12 text-[11px] font-extrabold uppercase tracking-[0.4em]">
+                <a href="#" class="hover:text-saffron transition">Home</a>
+                <a href="#about" class="hover:text-saffron transition">Our Story</a>
+                <a href="#menu" class="hover:text-saffron transition">Menu</a>
+                <a href="#contact" class="hover:text-saffron transition">Contact</a>
+                <a href="#menu" class="bg-saffron text-black px-8 py-3 rounded-full hover:bg-white transition duration-500">Book Order</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-bg flex items-center justify-center text-center">
-        <div class="max-w-4xl px-6">
-            <h1 class="text-7xl md:text-9xl font-display italic text-[#F4D03F] mb-6">Royal Dining</h1>
-            <p class="text-xl text-gray-400 mb-10 tracking-[0.2em]">Swaad jo Multan ki yaad dila de.</p>
-            <a href="#menu" class="bg-white text-black px-12 py-5 font-bold uppercase tracking-widest hover:bg-[#F4D03F] transition">Explore Menu</a>
+    <header class="parallax-hero flex items-center justify-center text-center">
+        <div class="max-w-6xl px-6">
+            <span class="text-saffron tracking-[1em] uppercase text-[10px] font-bold mb-8 block reveal-top">Premium Culinary Heritage</span>
+            <h1 class="text-7xl md:text-[140px] font-display italic leading-none mb-10 reveal-top">Flavours <br> From The Heart.</h1>
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center reveal-bottom">
+                <a href="#menu" class="bg-white text-black px-15 py-6 rounded-full font-black uppercase tracking-widest hover:bg-saffron transition-all duration-700 px-12">View Menu</a>
+                <p class="text-white/40 text-xs tracking-widest uppercase italic max-w-xs text-left border-l border-white/10 pl-6">
+                    Authentic recipes preserved for generations in the heart of Multan.
+                </p>
+            </div>
         </div>
     </header>
 
-    <section id="menu" class="py-24 container mx-auto px-6">
-        <h2 class="text-5xl font-display text-center mb-16">Chef's Signature</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="premium-card rounded-3xl p-5 text-center">
-                <img src="https://images.pexels.com/photos/12737657/pexels-photo-12737657.jpeg?auto=compress&w=800" class="h-64 w-full object-cover rounded-2xl mb-6">
-                <h3 class="text-2xl font-display mb-2">Multani Mutton Karhai</h3>
-                <p class="text-[#F4D03F] text-xl font-bold mb-6">Rs. 2,800</p>
-                <button onclick="openOrderModal('Mutton Karhai', 2800)" class="w-full bg-[#F4D03F] text-black py-4 rounded-xl font-bold hover:bg-white transition">Order Now</button>
+    <section id="about" class="py-40 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-10 grid md:grid-cols-2 gap-24 items-center">
+            <div class="reveal-left">
+                <h2 class="text-6xl font-display italic text-saffron mb-8">Our Legacy</h2>
+                <p class="text-gray-400 text-lg leading-loose mb-10">
+                    Founded in 1987, Tandoor Multan is more than just a restaurant; it's a journey back to the roots of Punjabi hospitality. We use stone-ground spices and traditional clay ovens to ensure every bite tells a story of tradition.
+                </p>
+                <div class="grid grid-cols-2 gap-10">
+                    <div><h4 class="text-4xl font-display text-white">35+</h4><p class="text-xs text-saffron uppercase tracking-widest mt-2">Years of Swaad</p></div>
+                    <div><h4 class="text-4xl font-display text-white">100%</h4><p class="text-xs text-saffron uppercase tracking-widest mt-2">Desi Ghee</p></div>
+                </div>
+            </div>
+            <div class="relative reveal-right">
+                <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&w=800" class="rounded-[50px] shadow-3xl">
+                <div class="absolute -bottom-10 -left-10 bg-saffron text-black p-12 rounded-[40px] hidden lg:block">
+                    <p class="font-black text-2xl">Traditional<br>Chef's Choice</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-40 container mx-auto px-6">
+        <div class="text-center mb-32 reveal-top">
+            <h2 class="text-7xl font-display italic text-white mb-6">Our Signature Menu</h2>
+            <p class="text-gray-500 tracking-[0.5em] uppercase text-[10px]">Exquisite Handpicked Selection</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div class="premium-card rounded-[50px] p-8 reveal-bottom">
+                <div class="h-[400px] rounded-[40px] overflow-hidden mb-10">
+                    <img src="https://images.pexels.com/photos/12737657/pexels-photo-12737657.jpeg?auto=compress&w=800" class="w-full h-full object-cover transform transition duration-1000 hover:scale-110">
+                </div>
+                <div class="text-center">
+                    <h3 class="text-3xl font-display mb-4">Royal Mutton Karahi</h3>
+                    <p class="text-saffron text-2xl font-black mb-8">Rs. 3,200</p>
+                    <button onclick="openOrder('Mutton Karahi', 3200)" class="w-full py-5 rounded-full border border-white/10 hover:bg-white hover:text-black font-bold transition duration-500">Order On WhatsApp</button>
+                </div>
             </div>
 
-            <div class="premium-card rounded-3xl p-5 text-center">
-                <img src="https://images.pexels.com/photos/533325/pexels-photo-533325.jpeg?auto=compress&w=800" class="h-64 w-full object-cover rounded-2xl mb-6">
-                <h3 class="text-2xl font-display mb-2">BBQ Tikka Platter</h3>
-                <p class="text-[#F4D03F] text-xl font-bold mb-6">Rs. 1,200</p>
-                <button onclick="openOrderModal('BBQ Tikka Platter', 1200)" class="w-full bg-[#F4D03F] text-black py-4 rounded-xl font-bold hover:bg-white transition">Order Now</button>
+            <div class="premium-card rounded-[50px] p-8 reveal-bottom" style="transition-delay: 0.2s;">
+                <div class="h-[400px] rounded-[40px] overflow-hidden mb-10">
+                    <img src="https://images.pexels.com/photos/533325/pexels-photo-533325.jpeg?auto=compress&w=800" class="w-full h-full object-cover transition duration-1000 hover:scale-110">
+                </div>
+                <div class="text-center">
+                    <h3 class="text-3xl font-display mb-4">Kasturi Tikka Platter</h3>
+                    <p class="text-saffron text-2xl font-black mb-8">Rs. 1,600</p>
+                    <button onclick="openOrder('Kasturi Tikka', 1600)" class="w-full py-5 rounded-full border border-white/10 hover:bg-white hover:text-black font-bold transition duration-500">Order On WhatsApp</button>
+                </div>
             </div>
 
-            <div class="premium-card rounded-3xl p-5 text-center">
-                <img src="https://images.pexels.com/photos/11134887/pexels-photo-11134887.jpeg?auto=compress&w=800" class="h-64 w-full object-cover rounded-2xl mb-6">
-                <h3 class="text-2xl font-display mb-2">Special Roghni Naan</h3>
-                <p class="text-[#F4D03F] text-xl font-bold mb-6">Rs. 150</p>
-                <button onclick="openOrderModal('Roghni Naan', 150)" class="w-full bg-[#F4D03F] text-black py-4 rounded-xl font-bold hover:bg-white transition">Order Now</button>
+            <div class="premium-card rounded-[50px] p-8 reveal-bottom" style="transition-delay: 0.4s;">
+                <div class="h-[400px] rounded-[40px] overflow-hidden mb-10">
+                    <img src="https://images.pexels.com/photos/11134887/pexels-photo-11134887.jpeg?auto=compress&w=800" class="w-full h-full object-cover transition duration-1000 hover:scale-110">
+                </div>
+                <div class="text-center">
+                    <h3 class="text-3xl font-display mb-4">Special Roghni Naan</h3>
+                    <p class="text-saffron text-2xl font-black mb-8">Rs. 250</p>
+                    <button onclick="openOrder('Roghni Naan', 250)" class="w-full py-5 rounded-full border border-white/10 hover:bg-white hover:text-black font-bold transition duration-500">Order On WhatsApp</button>
+                </div>
             </div>
         </div>
     </section>
 
     <div id="orderModal">
-        <div class="bg-[#1A1A1A] p-8 rounded-3xl w-full max-w-md border border-white/10 mx-4">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-display text-[#F4D03F]">Complete Your Order</h2>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
-            </div>
-            
-            <p class="text-sm text-gray-400 mb-6">Ordering: <span id="selectedDish" class="text-white font-bold"></span></p>
+        <div class="bg-dark p-12 rounded-[50px] w-full max-w-xl border border-white/10 shadow-4xl relative">
+            <button onclick="closeModal()" class="absolute top-10 right-10 text-4xl text-gray-600 hover:text-white transition">&times;</button>
+            <h2 class="text-5xl font-display italic text-saffron mb-4">Finalize Order</h2>
+            <p class="text-gray-400 mb-10 uppercase tracking-widest text-[10px] font-bold">Item: <span id="itemTitle" class="text-white"></span></p>
 
-            <div class="space-y-4">
-                <input type="text" id="custName" placeholder="Apna Naam Likhein" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl focus:border-[#F4D03F] outline-none">
-                <input type="tel" id="custPhone" placeholder="WhatsApp Number" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl focus:border-[#F4D03F] outline-none">
-                <textarea id="custAddress" placeholder="Pura Address Likhein" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl focus:border-[#F4D03F] outline-none h-24"></textarea>
-                
-                <button onclick="submitToWhatsApp()" class="w-full bg-green-600 text-white py-5 rounded-xl font-bold text-lg hover:bg-green-500 transition shadow-2xl">
-                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp Par Order Bhejein
-                </button>
+            <div class="space-y-6">
+                <input type="text" id="name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 p-6 rounded-2xl outline-none focus:border-saffron transition">
+                <input type="tel" id="phone" placeholder="WhatsApp Number" class="w-full bg-white/5 border border-white/10 p-6 rounded-2xl outline-none focus:border-saffron transition">
+                <textarea id="address" placeholder="Delivery Address" class="w-full bg-white/5 border border-white/10 p-6 rounded-2xl outline-none focus:border-saffron transition h-32"></textarea>
+                <button onclick="send()" class="w-full bg-saffron text-black py-6 rounded-2xl font-black text-xl hover:bg-white transition duration-500">SEND VIA WHATSAPP</button>
             </div>
         </div>
     </div>
 
-    <script>
-        let selectedItem = "";
-        let selectedPrice = 0;
+    <footer id="contact" class="py-40 bg-[#080808] border-t border-white/5">
+        <div class="container mx-auto px-10 text-center">
+            <h2 class="text-7xl font-display italic mb-10">Visit Us</h2>
+            <div class="flex flex-wrap justify-center gap-20 text-gray-500 tracking-widest uppercase text-xs">
+                <div class="reveal-bottom">
+                    <p class="text-saffron mb-4">Location</p>
+                    <p>Gulgasht Colony, Multan</p>
+                </div>
+                <div class="reveal-bottom">
+                    <p class="text-saffron mb-4">Call Us</p>
+                    <p>+92 300 1234567</p>
+                </div>
+                <div class="reveal-bottom">
+                    <p class="text-saffron mb-4">Timings</p>
+                    <p>1:00 PM — 1:00 AM</p>
+                </div>
+            </div>
+            <div class="mt-40 opacity-20 text-[10px] tracking-[1em] uppercase font-bold">
+                Developed by Abdullah Coder &copy; 2026
+            </div>
+        </div>
+    </footer>
 
-        function openOrderModal(name, price) {
-            selectedItem = name;
-            selectedPrice = price;
-            document.getElementById('selectedDish').innerText = name + " (Rs. " + price + ")";
+    <script>
+        // Initialize Animations
+        ScrollReveal().reveal('.reveal-top', { distance: '80px', origin: 'top', duration: 1500, delay: 200 });
+        ScrollReveal().reveal('.reveal-bottom', { distance: '80px', origin: 'bottom', duration: 1500, delay: 400 });
+        ScrollReveal().reveal('.reveal-left', { distance: '80px', origin: 'left', duration: 1500, delay: 400 });
+        ScrollReveal().reveal('.reveal-right', { distance: '80px', origin: 'right', duration: 1500, delay: 400 });
+
+        let item = "";
+        let price = 0;
+
+        function openOrder(n, p) {
+            item = n; price = p;
+            document.getElementById('itemTitle').innerText = n;
             document.getElementById('orderModal').style.display = 'flex';
         }
 
@@ -117,32 +244,17 @@
             document.getElementById('orderModal').style.display = 'none';
         }
 
-        function submitToWhatsApp() {
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
-            const address = document.getElementById('custAddress').value;
+        function send() {
+            const n = document.getElementById('name').value;
+            const ph = document.getElementById('phone').value;
+            const ad = document.getElementById('address').value;
 
-            if(!name || !phone || !address) {
-                alert("Bhai, saari details bharna zaroori hain!");
-                return;
-            }
+            if(!n || !ph || !ad) return alert("Fill all details bro!");
 
-            // Owner's Number (Yahan badal dena)
-            const ownerNumber = "923001234567";
-
-            const message = `*NEW ORDER RECEIVED*%0A` +
-                            `--------------------------%0A` +
-                            `*Dish:* ${selectedItem}%0A` +
-                            `*Price:* Rs. ${selectedPrice}%0A` +
-                            `--------------------------%0A` +
-                            `*Customer Details:*%0A` +
-                            `*Name:* ${name}%0A` +
-                            `*Phone:* ${phone}%0A` +
-                            `*Address:* ${address}%0A` +
-                            `--------------------------%0A` +
-                            `_Sent from Website Form_`;
-
-            window.open(`https://wa.me/${ownerNumber}?text=${message}`, '_blank');
+            const num = "923001234567"; // CHANGE THIS
+            const msg = `*NEW ORDER FROM WEB*%0A------------------%0A*Item:* ${item}%0A*Price:* Rs. ${price}%0A------------------%0A*Cust:* ${n}%0A*Phone:* ${ph}%0A*Addr:* ${ad}`;
+            
+            window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
             closeModal();
         }
     </script>
